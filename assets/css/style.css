@@ -1,0 +1,44 @@
+body {
+    background-image: url(http://i10.photobucket.com/albums/a102/Gremolin/3D/Gym015.jpg);
+    height: 10%;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+    text-shadow: 2px 2px 5px yellow;
+}
+
+#card {
+    margin: 0 auto 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.card-title {
+        border: 3px solid red;
+        background-color: white;
+        padding-bottom: 5px;
+    }
+
+.card-img-top {
+    border: 3px solid red;
+}
+
+.card-text {
+    border: 3px solid red;
+    background-color: white;
+}
+
+.btn-primary {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: gold;
+    font-size: 30px;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus, .btn-primary.active {
+    transform: translateY(4px);
+}
