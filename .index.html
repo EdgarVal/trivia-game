@@ -9,7 +9,8 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
   </head>
 
-  <body>
+<body>
+  
 <!-----------------Start Page------------------->
 
 <h1 class="title">Are you a Pokemon master?</h1>
@@ -17,44 +18,58 @@
     <div id="card" class="mx-auto" style="width: 18rem;">
       <img class="card-img-top" src="assets/images/pika.gif" alt="title">
       <div class="card-body">
-        <h5 class="card-title">Answer the questions to see how well you know your Pokemon</h5>
-        <p class="card-text">You will have 10 seconds to make your guess</p>
+        <h5 class="card-title"><b>Answer the questions to see how well you know your Pokemon</b></h5>
+        <p class="card-text"><b>You will have 15 seconds to make your guess!</b></p>
         <a href="#" class="btn btn-primary" id="start"><b>START</b></a>
       </div>
     </div>
   
 
 
-<!-----------------Questions------------------->
-<!-- <div id=currentQuestion></div>
-       <div id=timeLeft></div>
-        <div class="list-group" class="questionList">
-            <a href="#" class="list-group-item list-group-item-action"></a>
-            <a href="#" class="list-group-item list-group-item-action"></a>
-            <a href="#" class="list-group-item list-group-item-action"></a>
-            <a href="#" class="list-group-item list-group-item-action"></a>
-          </div>  -->
+<!---------------Questions------------------->
+<br>
+    <div id='currentQuestion'>
+     <div id='timer'></div>
+      <br>
+       <div id='theQuestion'></div>
+       <br>
+        <div class="list-group mx-auto justify-content-center" id='list'>
+            <p class="list-group-item list-group-item-action" id='list1'></p>
+            <p class="list-group-item list-group-item-action" id='list2'></p>
+            <p class="list-group-item list-group-item-action" id='list3'></p>
+            <p class="list-group-item list-group-item-action" id='list4'></p>
+          </div>
+        </div>
     
 
-<!-----------------Score Page------------------->
-  <!-- <div id="finalScore">
+<!-----------------Answer Page--------------->
+  <div class="container" id='answer'>
+    <div id='textAnswer'></div>
+    <div id='correctAns'></div>
+  </div>
+
+
+<!-----------------Score Page---------------->
+  <div id="finalScore">
     <br>
     <h3>Results</h3>
     <div id=rightAnswers></div>
     <div id=wrongAnswers></div>
     <a href="#" class="btn btn-primary" class="restart"><b>START OVER</b></a>
-  </div> -->
+  </div>
 
 
 
 
-
+<!-- <audio id="pikaSound" src="assets/sounds/Pikaaaa.mp3"></audio> -->
 
 <script  src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="assets/javascript/triv.js"></script>
+<!-- <script src="jquery.easyaudioeffects.1.0.0.js"></script> -->
+
 
 </body>
 </html>
