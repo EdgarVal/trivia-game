@@ -11,19 +11,18 @@
 
 <body>
   
-<!-----------------Start Page------------------->
-
+<!-----------------Start Page----------------->
 <h1 class="title">Are you a Pokemon master?</h1>
   <br>
     <div id="card" class="mx-auto" style="width: 18rem;">
       <img class="card-img-top" src="assets/images/pika.gif" alt="title">
       <div class="card-body">
-        <h5 class="card-title"><b>Answer the questions to see how well you know your Pokemon</b></h5>
-        <p class="card-text"><b>You will have 15 seconds to make your guess!</b></p>
+        <h5 class="card-title" id="text"><b>Answer the questions to see how well you know your Pokemon!</b></h5>
+        <p class="card-text" id="text"><b>You will have <u>15 seconds</u> to answer the question</b></p>
         <a href="#" class="btn btn-primary" id="start"><b>START</b></a>
       </div>
     </div>
-  
+<!-------------------------------------------> 
 
 
 <!---------------Questions------------------->
@@ -40,35 +39,43 @@
             <p class="list-group-item list-group-item-action" id='list4'></p>
           </div>
         </div>
-    
+<!------------------------------------------->
 
 <!-----------------Answer Page--------------->
-  <div class="container" id='answer'>
-    <div id='textAnswer'></div>
-    <div id='correctAns'></div>
-  </div>
 
+  <!-- <div class="media" id='answer-card'>
+      <img class="mr-3" src=".../64x64" alt="Generic placeholder image">
+      <div class="media-body">
+        <h5 class="mt-0"> Correct Answers</h5>
+        <div id='textAnswer'></div>
+        <div id='correctAns'></div>
+      </div>
+    </div> -->
+<!------------------------------------------->
 
 <!-----------------Score Page---------------->
-  <div id="finalScore">
+  <div class="card-body" id="finalScore">
     <br>
-    <h3>Results</h3>
-    <div id=rightAnswers></div>
-    <div id=wrongAnswers></div>
-    <a href="#" class="btn btn-primary" class="restart"><b>START OVER</b></a>
+    <div id="card" class="mx-auto" style="width: 18rem;">
+      <h3 class="card-title" id="text">Results</h3>
+      <div class="card-text text" id="rightAnswers"></div>
+      <br>
+      <div class="card-text text" id="wrongAnswers"></div>
+      <br>
+      <a href="#" class="btn btn-primary" id="restart"><b>Play Again?</b></a>
+    </div>
+    <br>
+    <div id="endGame"></div>
   </div>
+<!------------------------------------------->
 
-
-
-
-<!-- <audio id="pikaSound" src="assets/sounds/Pikaaaa.mp3"></audio> -->
 
 <script  src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="assets/javascript/triv.js"></script>
-<!-- <script src="jquery.easyaudioeffects.1.0.0.js"></script> -->
+
 
 
 </body>

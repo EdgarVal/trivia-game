@@ -1,9 +1,8 @@
 body {
     background-image: url(http://i10.photobucket.com/albums/a102/Gremolin/3D/Gym015.jpg);
-    height: 100%;
-    /* background-position: center; */
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -30,6 +29,17 @@ h1 {
         /* opacity: 0.5; */
     }
 
+#answer-card {
+        width: 700px;
+        margin: 0 auto 0 auto;
+        display: inline-block;
+        /* position: relative; */
+        text-align: center;
+        background-color: white;
+        border: 3px solid red;
+    }
+
+
 .card-text {
     border: 3px solid red;
     background-color: white;
@@ -47,13 +57,14 @@ h1 {
 }
 
 #timer {
-        width: 70px;
-        height: 30px;
-        background: white;
-        text-align: center;
-        margin: 0 auto 0 auto;
-        position: relative;
-        border: 2px solid red;
+    width: 70px;
+    height: 30px;
+    background: white;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    position: relative;
+    border: 2px solid red;
+    font-weight: bold;
 }
 
 #theQuestion {
@@ -77,3 +88,17 @@ h1 {
     text-align: center;
 }
 
+#text {
+    opacity: 0.8;
+}
+
+.text {
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+#endGame {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}

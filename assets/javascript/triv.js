@@ -1,202 +1,232 @@
 $(document).ready(function(){
 //--------------------Gobal variables-----------------------
     var trivia = [{
-        question: "How old was Ash when he started his Pokemon journey?",
+        question: "? #1-10 : How old was Ash when he started his Pokemon journey?",
         choices: [12, 10, 5, 8],
         correctAnswer: 1,
     },
     {
-        question: "How many evolutions does Eevee have?",
+        question: "? #2-10 : How many evolutions does Eevee have?",
         choices: [5, 10, 8, 6],
         correctAnswer: 2,
     },
     {
-        question: "How do you evolve your Haunter in the Gameboy/DS games?",
-        choices:["Dark Stone", "Trading", "At level 36", "When Beautiful condition is high enough"],
+        question: "? #3-10 : How do you evolve your Haunter in the Gameboy/DS games?",
+        choices:["Dark Stone", "Trading", "At level 36", "When beautiful condition is high enough"],
         correctAnswer: 1,
     },
     {
-        question: "Which of these Pokemon did Ash actually catch?",
+        question: "? #4-10 : Which of these Pokemon did Ash actually catch?",
         choices: ["Primeape", "Squirtle", "Pikachu", "Raticate"],
         correctAnswer: 0,
     },
     {
-        question: "How many badges do you need to enter the Pokemon League?",
+        question: "? #5-10 : How many badges do you need to enter the Pokemon League?",
         choices: [6, 4, 10, 8],
         correctAnswer: 3,
     },
     {
-        question: "Which move would be super effective against Bulbasaur?",
+        question: "? #6-10 : Which move would be super effective against Bulbasaur?",
         choices: ["Fire punch", "Tackle", "Water gun", "Thunder"],
         correctAnswer: 0,
     },
     {
-        question: "Finsh the theme song lyric, 'I wanna be the very best like....'",
+        question: "? #7-10 : Finsh the theme song lyric, 'I wanna be the very best like....'",
         choices: ["my momma said I was", "the champion of the world", "a Pokemon master", "no one ever was"],
         correctAnswer: 3,
     },
     {
-        question: "Who also trained to be a Pokemon breeder?",
+        question: "? #8-10 : Who trained to be a Pokemon breeder?",
         choices: ["Ash's mom", "Brock", "Tracey", "Gary"],
         correctAnswer: 1,
     },
     {
-        question: "Who helps Ash's mom with the chores at the house?",
+        question: "? #9-10 : Who helps Ash's mom with the chores at the house?",
         choices: ["Mr. Mime", "Jynx", "Lickitung", "Professor Oak"],
         correctAnswer: 0,
     },
     {
-        question: "How do you wake up Snorlax?",
+        question: "? #10-10 : How do you wake up Snorlax?",
         choices: ["Use double-slap on it", "Throw a rock at it", "Use Pokeflute", "Use an awakening item" ],
         correctAnswer: 2,
     },
     ];
-        var currentQ;
-        var answered;
-        var time;
-        var Answer;
-        var wrongAnswer;
-        var noAnswer;
-        var pick;
-        var texts = {
-            correct: "That was super effective!",
-            incorrect: "That was not very effective.",
-            timeOut: "Out of time",
-        }
+
+    var currentQ;
+    var time;
+    var seconds;
+    var rightChoice = 0;
+    var wrongChoice = 0;
+    var userChoice; //tracks what the user choose as their answer
+    var counter = 0; //counter how many questions have passed so far
+
 //--------------------------------------------------------
 
-//------------------Starting the game---------------------
-        $('#currentQuestion').hide();
-        $("#finalScore").hide();
-        $('#answer').hide();
-        //line above are to make the html element hide when page first load before they called upon to appear
+//------------------Homepage------------------------------
+    $('#currentQuestion').hide();
+    $("#finalScore").hide();
+    $('#answer-card').hide();
+    //lines above are to make the html elements hide when page first load before they called upon to appear
 
-        $("#start").on('click', function(){
-            $(this).hide();
-            $('.title').show();
-            $('#card').hide();
-            // $("audio#pikaSound")[0].play();
-            newGame();
-        });
-        //function above is a to make click function to start the game & hide the current elements on the page 
+    $("#start").on('click', function(){
+        $(this).hide();
+        $('.title').show();
+        $('#card').hide();
+        newGame();
+    });
+    //function above is a to make click function to start the game & hide the current elements on the page 
+//--------------------------------------------------------
 
+//------------------Starting The Game---------------------
+    function newGame(){
+        $('#currentQuestion').show();
+        $("#start").hide();
+        $('.title').show();
+        var question = $("#theQuestion");
+        question.text(trivia[0].question);
+        $("#list").css({"opacity": "0.9", "font-weight": "bold"});
+        //line above displays the question to the id #theQuestion
+        var answer1 = $('#list1');
+        var answer2 = $('#list2');
+        var answer3 = $('#list3');
+        var answer4 = $('#list4');
+        //variables above use jquery value to select the id's to be placed in the list elements
 
-        function newGame(){
-            $('#currentQuestion').show();
-            $("#start").hide();
-            $('.title').show();
-            
-            for (var i = 0; i < trivia.length; i++) {
-            //console.log(trivia[i]);
-            //for loop above loops through the trivia array    
-                var question = $("#theQuestion");
-                question.text(trivia[i].question);
-            //line above dislplays the question to the id #theQuestion
-                var answer1 = $('#list1');
-                var answer2 = $('#list2');
-                var answer3 = $('#list3');
-                var answer4 = $('#list4');
-            //variables above use jquery value to select the id's to be placed in the list elements
-            // console.log(trivia[i].choices)
-                answer1.text(trivia[i].choices[0]);
-                answer2.text(trivia[i].choices[1]);
-                answer3.text(trivia[i].choices[2]);
-                answer4.text(trivia[i].choices[3]);
-        }
-        //nextQuestion();
+        answer1.text(trivia[0].choices[0]);
+        answer2.text(trivia[0].choices[1]);
+        answer3.text(trivia[0].choices[2]);
+        answer4.text(trivia[0].choices[3]);
         countDown();
     }
+//--------------------------------------------------------
 
-        function nextQuestion(){
-            $('#start').hide();
-            $("#correctAns").empty();
-            $("#textAnswer").empty();
-            answered = true;
+//------------------Moving to next question---------------
+    function nextQuestion(){
+        $('#start').hide();
+        $("#correctAns").empty();
+        $("#textAnswer").empty();
+        answered = true;
 
-            $("#theQuestion").html('Question #'+(currentQ+1)+'/'+trivia.length);
-            for (var i = 0; i < trivia.length; i++) {  
-                    var question = $("#theQuestion");
-                    question.text(trivia[i].question);
-                    
-                        var answer1 = $('#list1');
-                        var answer2 = $('#list2');
-                        var answer3 = $('#list3');
-                        var answer4 = $('#list4');
-                            answer1.text(trivia[i].choices[0]);
-                            answer2.text(trivia[i].choices[1]);
-                            answer3.text(trivia[i].choices[2]);
-                            answer4.text(trivia[i].choices[3]);
-            }
-        }
-        // countDown();
+        $("#theQuestion").html('Question #' + (currentQ + 1) + '/' + trivia.length);
+        $("#list").css({"opacity": "0.9", "font-weight": "bold"});
+        var question = $("#theQuestion");
+        question.text(trivia[counter].question);
+        console.log(counter);
 
-        $(".userChoice").on('click', function() {
-            pick = $('this').data('index');
-            clearInterval(time);
-            answerPage();
-        })
+        var answer1 = $('#list1');
+        var answer2 = $('#list2');
+        var answer3 = $('#list3');
+        var answer4 = $('#list4');
+
+        answer1.text(trivia[counter].choices[0]);
+        answer2.text(trivia[counter].choices[1]);
+        answer3.text(trivia[counter].choices[2]);
+        answer4.text(trivia[counter].choices[3]);
+        clearInterval(time);
+        countDown();
+    }   
+
+//----------------------------------------------------------
+
+//---------------------timer--------------------------------
+    function countDown() {
+        seconds = 15;
+        $("#timer").html("" + seconds);
+        $("#timer").css({"opacity": "0.9"});
+        answered = true;
+        time = setInterval(countShow, 1000);
+     
+    };  
 
 
-//--------------------------------------------------------------
-
-
-//---------------------timer-----------------------------------
-        function countDown() {
-            seconds = 15;
+    function countShow() {
+        seconds --;
+        if(seconds < 10) {
             $('#timer').html("" + seconds);
-            answered = true;
-            time = setInterval(countShow, 1000);
-            //console.log(seconds);
-        };  
-
-        function countShow() {
-            seconds --;
-            if(seconds < 10) {
-                $('#timer').html("" + seconds);
-                $('#timer').css({"color": "red"});
+            $('#timer').css({"color": "red"});
+        } else {
+            $('#timer').html("" + seconds);
+        } if (seconds < 1) {
+            console.log("you're at this " + counter);
+            if (counter == 9) {
+            clearInterval(time);
+            wrongChoice++;
+            answered = false;
+            counter++;
+            answerPage();
             } else {
-                $('#timer').html("" + seconds);
-                $('#timer').css({"color": + "red"});
-            } if (seconds < 1) {
-                clearInterval(time);
-                answered = false;
-                answerPage();
-            }
-            
+                    clearInterval(time);
+                    answered = false;
+                    wrongChoice++;
+                    counter++;
+                    nextQuestion();
+                    console.log("?'s wrong/not answered: " + wrongChoice);
+                }
+        } if (seconds > 10) {
+            $("#timer").css({"color": "black"});
         }
+    }
+
 //-------------------------------------------------------------
         
 //--------------------User guess-------------------------------
-        $('list-group-item').on('click', function(){
-            for(var i = 0; i < trivia[0].choices.length; i++){
-                trivia[0].choices[i];
-                $("p.list-group-item").addClass('userChoice');
-            }
-            console.log(this);
-        });
-    
+    $('.list-group-item').on('click', function(){
+        for(var i = 0; i < trivia[0].choices.length; i++){
+            trivia[0].choices[i];
+            $("p.list-group-item").addClass('userChoice');
+        }
+        
+        userChoice = $(this).text();
+        console.log(userChoice);
+        var rightAnswer = trivia[counter].correctAnswer;
+        var answer = trivia[counter].choices[rightAnswer]; //variable rightAnswer is a number so we can use inside of the []
+        counter++;  //line makes the counter switch to next question & keep track of how many have been answered 
+        
+        if(userChoice == answer) {
+            rightChoice++;
+            console.log("?'s correct: " + rightChoice);
+        } else {
+            wrongChoice++;
+            console.log("?'s wrong/not answered: " + wrongChoice);
+        } if (counter === trivia.length) {
+            answerPage();
+        } else {
+            nextQuestion(5000);
+        }
+    });
+
 //-----------------------------------------------------------
 
 //-------------------Answer Page-----------------------------
     function answerPage(){
-        // $("#currentQuestion").empty();
+        $('#currentQuestion').hide();
+        $("#start").hide();
+        $("#timer").hide();
+        $(".title").show();
+        $("#finalScore").show();
+        clearInterval(time);
+        $("#rightAnswers").html("Correct Answers: " + rightChoice);
+        $("#wrongAnswers").html("Wrong or Unanswered: " + wrongChoice);
+        $("#restart").show();
 
-
-        
-        // console.log(answerNumber);
-        if ((pick == answerNumber) && (answered == true)){
-            answer++;
-            alert('correct');
-            $('#text').html(texts.correct);
-        } else if ((pick != answerNumber) && (answered == true)){
-            wrongAnswer++;
-            $('#text').html(texts.incorrect);
+        if (rightChoice > 7) {
+            $("#endGame").html("You're a Pokemon master!");
         } else {
-            noAnswer++;
-            $('#text').html(texts.timeOut);
-        }  
-    }
-    // answerPage();
+            $("#endGame").html("You could use more training");
+        }
+    };
+//-----------------------------------------------------------
 
-    
+//-------------------Restart Button--------------------------
+    $("#restart").on('click', function(restart){
+        $(this).hide();
+        $("#finalScore").hide();
+        counter = 0;
+        rightChoice = 0;
+        wrongChoice = 0;
+        newGame();
+        $("#timer").show();
+    });
+
+//-----------------------------------------------------------
 });
